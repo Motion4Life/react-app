@@ -23,6 +23,12 @@ jobs:
           CI: true
 
       # Confirm pull request
-      - name: Build and Deploy
+      - name: Build
         if: github.event_name == 'push'
-        run: npm run deploy
+        run: npm run build
+      - name: Deploy
+        if: github.event_name == 'push'
+        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        with:
+          branch: gh-pages
+          folder: build
