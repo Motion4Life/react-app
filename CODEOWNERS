@@ -1,5 +1,5 @@
-* @Motion4Life    // every file belongs to Motion4Life
-*.js @Motion4Life   // every js files belongs to Motion4Life
+* @Motion4Life    
+*.js @Motion4Life 
 
-*.yml @anotherAccount  // .yml files belong to anotherAccount
+*.yml @anotherAccount
 /public   @Motion4Life
