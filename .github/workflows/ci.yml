@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # Cache
-      - name: cache_node_modules
+      - name: Cache node_modules
         uses: actions/cache@v1
         with:
           path: ~/.npm
