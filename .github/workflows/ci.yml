@@ -31,10 +31,26 @@ jobs:
         env:
           CI: true
 
+      # Upload Coverage
+      - name: Upload Test Coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage
+          path: coverage
+
       # Confirm pull request
       - name: Build
         if: github.event_name == 'push'
         run: npm run build
+
+      # Upload Build Folder
+      - name: Upload Build Folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build
+
+      # Deploy to github-pages
       - name: Deploy
         if: github.event_name == 'push'
         uses: JamesIves/github-pages-deploy-action@v4.3.0
