@@ -20,9 +20,13 @@ jobs:
         env:
           CI: true
 
-      - name: Build project
+      - name: Build
         if: github.event_name == 'push'
         run: npm run build
-      - name: Deploy to Staging
+
+      - name: Deploy
         if: github.event_name == 'push'
-        run: npx surge
+        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        with:
+          branch: develop
+          folder: build
