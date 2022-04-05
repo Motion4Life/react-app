@@ -20,13 +20,6 @@ jobs:
         env:
           CI: true
 
-      - name: Build
+      - name: Build and Deploy
         if: github.event_name == 'push'
-        run: npm run build
-
-      - name: Deploy
-        if: github.event_name == 'push'
-        uses: JamesIves/github-pages-deploy-action@v4.3.0
-        with:
-          branch: develop
-          folder: build
+        run: npm run deploy
