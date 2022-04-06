@@ -3,12 +3,10 @@ name: Cypress-Docker
 on:
   schedule:
     - cron: 0 8 * * 0
-  repository_dispatch:
-    types: [cypress-start]
+  pull_request:
+    branches: [develop, main]
   push:
     branches: [develop, main]
-    paths:
-      - '**.tsx?'
 
 jobs:
   # Job 1
