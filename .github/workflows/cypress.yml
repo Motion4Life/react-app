@@ -1,0 +1,55 @@
+name: Cypress-Docker
+
+on:
+  schedule:
+    - cron: 0 8 * * 0
+  repository_dispatch:
+    types: [cypress-start]
+  push:
+    branches: [develop, main]
+    paths:
+      - '**.tsx?'
+
+jobs:
+  # Job 1
+  cypress-run:
+    # Strategy
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+      max-parallel: 1
+    runs-on: ${{ matrix.os }}
+
+    # Container
+    container:
+      image: cypress/included:8.7.0
+
+    # Steps
+    steps:
+      - name: Checkout code
+        id: checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress
+        id: cypress
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
+
+      - name: Upload (failure)
+        id: failure
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload videos
+        id: upload
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
