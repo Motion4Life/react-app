@@ -1,3 +1,5 @@
+![](https://github.com/Motion4Life/react-app/workflows/CI/badge.svg?branch=develop&event=push)
+
 # Getting Started with Create React App (Sandro)2022
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
