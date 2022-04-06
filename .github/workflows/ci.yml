@@ -51,6 +51,13 @@ jobs:
           name: build
           path: build
 
+      # Zip assets for release
+      - name: ZIP Assets
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          zip -r build.zip ./build        # needs to be done for asset relase
+          zip -r coverage.zip ./coverage
+
       # Create a release for main
       - name: Create a Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
